@@ -1,0 +1,103 @@
+
+body{
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    /* font-size: 16px; */
+    line-height: 1.7; /* wysokosc lini jest teraz 1.7 razy wększa -> zwiekszam odległość miedzy wierszami */ 
+    color: $color-gray-dark;
+    
+}
+
+.heading-primary{
+    color: $color-white;
+    text-transform: uppercase;
+
+    backface-visibility: hidden;  /* ukrywamy drzenie zachodzące podczas transfor,acji dla uzytkownika np przy obrocie o 18- stopni to co styłu pozostanie w miejscu */
+    
+    margin-bottom: 6rem;  /* przesówa przycisk w doł */
+
+    &--main{ /* span jest domyślnie elementem inline -> jest to po prostu tekst */
+        display: block;  /* bloc elements zajmują cała dostępna szerokość (100%) i tworzą one podziały linii po i przed nimi -> It starts on a new line, and takes up the whole width */
+        font-size: 6rem;
+        font-weight: 400;
+        letter-spacing: 3.5rem;
+    
+        animation-name: moveInLeft; /* nadaje nazwe animacji, która została zdefiniowana poniezej */
+        animation-duration: 1s;  /* czas, który powinna przyjac animacja */
+        animation-timing-function: ease-out; /* funkcja, która okresla spsob animacji np jak szybko lub jak wolno parametry funkcji zdzerzaja sie z czasem np. ease-in zacznie się wolno i na koncu przyspieszy */
+
+
+        @include respond(phone){
+            letter-spacing: 1rem;
+            font-size: 5rem;
+        }
+    
+        /* 
+        animation-iteration-count: 3;   animacja bedzie powtrzac sie 3 razy 
+        animation-delay: 3s;   zanim animacja się zacznie poczeka 3s 
+        */
+    }
+    
+    &--sub{
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1.74rem;
+    
+        /*
+        animation-name: moveInRight;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        */
+    
+        animation: moveInRight 1s ease-out;  /* wszytskie wyzej wymienione funkcje w jednym */
+
+        @include respond(phone){
+            letter-spacing: .5rem;
+            
+        }
+    }
+}
+
+.heading-secondary{
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: inline-block;
+    background-image: linear-gradient(
+        to right, $color-primary-light, $color-primary-dark);
+    -webkit-background-clip: text;  // tło zostaje przyciete dokładnie gdzie jest tekst
+    color: transparent;
+    letter-spacing: .2rem;
+    transition: all .2s;
+
+
+    @include respond(tab-port){
+        font-size: 3rem;
+    }
+
+    @include respond(phone){
+        font-size: 2.5rem;
+    }
+    
+    &:hover{
+        // scale(1.1) powieksza o 110%
+        transform: skewY(2deg) skewX(15deg) scale(1.1);
+        text-shadow: .5rem 1rem 2rem rgba($color-black, .2);
+    }
+}
+
+.heading-tertiary{
+    font-size: $default-font-size;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.paragraph{
+    font-size: $default-font-size;
+
+    &:not(:last-child){
+        margin-bottom: 3rem;
+    }
+}
+

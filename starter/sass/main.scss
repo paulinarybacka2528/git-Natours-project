@@ -1,0 +1,32 @@
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/variables";
+
+@import "base/animation";
+@import "base/base";
+@import "base/topography";
+@import "base/utilities";
+
+@import "components/button";
+@import "components/composition";
+@import "components/feature-box";
+@import "components/card";
+@import "components/story";
+@import "components/_bg-video.scss";
+@import "components/form";
+
+
+
+@import "layout/header";
+@import "layout/grid";
+@import "layout/navigation";
+@import "layout/footer";
+
+
+@import "pages/home";
+
+
+/* ! celem jest aby ten główny plik słuzył do importowania wswzystkich innych plików -> tu ma nie byc kodu zwyjątkiem wyzej wymienionych dekralacji */
+
+
+

@@ -1,0 +1,48 @@
+/* jesli bedziemy mieli wielostronnicowa strone to header bedzie na kazdej z nich zatem mozemy trakotowac header jako czesc layoutu */
+
+
+.header{
+    height: 95vh;  /* POCZYTAĆ ale coś tam ze wypełnia wtedy w 95% i zostaje 5% pasek */ 
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.8),
+        rgba($color-primary-dark, 0.8)), 
+          url(../img/hero.jpg); /* gradient zawsze pierwszy */
+    background-size: cover; /* cover -> niezaleznie od rozmiaru pudełka, obraz zawsze bedzie starał sie dopasować */
+    background-position: top; /* niezaleznie od rozmiaru widocznego obrazu, góra obrazu zawsze pozostaje na górze -> dolna częćś obrazu zostaje przycięta ale góra pozostaje taka sama */
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);  /* ściezka do klipu -> określamy wielokąt, w którym obraz lub element będzie nadal widoczny -> polygon() to funkcja wielokonta: zaczynamy od lewego górnego rogu i jedziemy zgodnie z ruchem wskazówek zegara, pierwsza wartość to x a druga y*/ 
+    position: relative; /* alelemt nadrzędny względem logo-box */ 
+
+
+    @include respond(phone){
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    }
+
+    &__logo-box{  /* & -> header, kopiuje element z góry */
+        position: absolute;
+    top: 4rem;  /* odniesienie względem którego pozycjonujemy jest element nadrzędny, którego pozycja jest ustawiona na względną -> w tym przypadku header */
+    left: 4rem;
+    }
+
+    &__logo{
+        height: 3.5rem;  /* ustawiamy wysokość samego elementu a tym samym nie musimy juz ustawiać szerokości */
+    }
+
+    &__text-box{
+        position: absolute;
+        top: 40%;  /* odnoscnie kometarza nizej tu było 50% ale zostało zmienione na 40% zeby lepiej wygladało bo mamy przycięta grafikę na dole */
+        left: 50%;  /* centrujemy pudełko tak ze jego lewy góryny róg bedzie zanjdował sie po środku wzgledem elementu macierzystego */
+        transform: translate(-50%, -50%); /* te dwie wartosci oznaczaja ze nasz element ma przesunać się o połowę jego szerokości w lewo i o połowę jego wysokości w górę */
+    
+        text-align: center;  /* to wycentrowuje przyscisk, a mozna tak zrobic dlatego ze zachowuje sie on jak tekst */
+    }
+}
+
+
+/*
+.logo:hover{
+    animation: moveInRight 1s ease-out;   animacja sie robi po najechaniu na logo mysza
+}
+*/

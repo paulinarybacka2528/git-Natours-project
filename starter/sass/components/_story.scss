@@ -1,0 +1,97 @@
+
+
+.story{
+    width: 75%;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    background-color: rgba($color-white, .6);
+    border-radius: 3px;
+    padding: 6rem;
+    padding-left: 9rem;
+    font-size: $default-font-size;
+    //clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    transform: skewX(-12deg);
+
+    & > *{
+        // obracamy tekst odwrtonie aby był normalny
+        transform: skewX(12deg);
+    }
+
+
+    @include respond(tab-port){
+        width: 100%;
+        padding: 4rem;
+        padding-left: 7rem;
+
+    }
+
+
+    @include respond(phone){
+        transform: skewX(0);
+    }
+
+    &__shape{
+        width: 15rem;
+        height: 15rem;
+        background-color: olivedrab;
+        float: left;
+        // tworzymy zawijanie wokół kółka -> działa to tylko przy float
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+        // przestrzen miedzy kołem a tekstem -> najlepszy sposob dla floata
+        transform: translateX(-3rem) skewX(12deg);
+        position: relative;
+
+
+        @include respond(phone){
+            transform: translateX(-3rem) skewX(0);
+        }
+    }
+
+    &__img{
+        // ! elastyczne obrazy do responsywnego projektowania zawsze potrzebuja szerokosci/wysokości
+        // obraz znajduje sie wewnątrz kształtu, który musi miec tutaj dobrze zdefiniowana szerokosc/wysokość 
+        height: 100%;
+        //transform: translate(-15%, 0);
+        transform: translateX(-4rem) scale(1.4);
+        transition: all .5s;
+       
+    }
+
+    &__text{
+        @include respond(phone){
+            transform: skewX(0);
+            
+        }
+    }
+
+    &__caption{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 20%);
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+        // stan początkowy dla pojawienia sie napisu
+        opacity: 0;
+        transition: all .5s;
+        // naprawia drzenie
+        backface-visibility: hidden;
+    }
+
+    // gdy strory jest hove my chcemy change the caption
+    &:hover &__caption{
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover &__img{
+        transform: translateX(-4rem) scale(1);
+        // rozmycie
+        filter: blur(3px) brightness(80%);
+    }
+}

@@ -1,0 +1,50 @@
+/* tutaj sa podtsawowoe definicje dotyczące całego projektu */
+
+
+
+*,
+*::after,
+*::before{ /* bo chcemy zeby nie tylko prawdziwe elementy dziedziczyły te własciwosci */
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html{
+    // This defines what 1rem is
+    // 1rem = 10px;  10px/16px = 62.5%
+    
+    font-size: 62.5%;  /* procentowy zapis czcionki bedzie przekładał sie na procentowy rozmiar czcionki podanej przez przeglądarkę -> 10/16 = 62.5% bo chcemy domyslnie 10px a nie 16px */
+
+    /*
+    font-size: 10px;  teraz wiemy ze 1 rem = dokładnie 10px i łatwiej nam bedzie zamienic wszytskie jednostki na rem niz jakby był domyslny rozmiar czyli 16px -> taki zapis nie jest dobra praktyka
+    */
+
+    /* ! jednostka rem spełnia wymogi responsywnosci */
+
+
+    // zawsze umieszczamy wikesze przed mniejszymi
+    @include respond(tab-land){   // width < 900?
+        font-size: 56.25%;  
+    } 
+
+    @include respond(tab-port){  // width < 600?
+        font-size: 50%; // 1 rem = 8px, 8/16 = 50%
+    }
+
+    @include respond(big-desktop){
+        font-size: 75%;
+    }
+}
+
+body{
+    box-sizing: border-box; /* aby obramowania i wyściółki nie były juz dodawane do całkowitej szerokosci lub wysokosci okreslonej dla skrzynki -> pozbywamy sie dodawania obramowań */
+    padding: 3rem;
+
+
+    @include respond(tab-port){
+        padding: 0;
+    }
+
+
+}

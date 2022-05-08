@@ -1,0 +1,224 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+*,
+*::after,
+*::before{ /* bo chcemy zeby nie tylko prawdziwe elementy dziedziczyły te własciwosci */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* aby obramowania i wyściółki nie były juz dodawane do całkowitej szerokosci lub wysokosci okreslonej dla skrzynki -> pozbywamy sie dodawania obramowań */
+}
+
+html{
+
+    font-size: 62.5%;  /* procentowy zapis czcionki bedzie przekładał sie na procentowy rozmiar czcionki podanej przez przeglądarkę -> 10/16 = 62.5% bo chcemy domyslnie 10px a nie 16px */
+
+    /*
+    font-size: 10px;  teraz wiemy ze 1 rem = dokładnie 10px i łatwiej nam bedzie zamienic wszytskie jednostki na rem niz jakby był domyslny rozmiar czyli 16px -> taki zapis nie jest dobra praktyka
+    */
+
+    /* ! jednostka rem spełnia wymogi responsywnosci */
+}
+
+body{
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    /* font-size: 16px; */
+    line-height: 1.7; /* wysokosc lini jest teraz 1.7 razy wększa -> zwiekszam odległość miedzy wierszami */ 
+    color: #777;
+    padding: 3rem;
+}
+
+.header{
+    height: 95vh;  /* POCZYTAĆ ale coś tam ze wypełnia wtedy w 95% i zostaje 5% pasek */ 
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(126, 213, 111, 0.8),
+        rgba(40, 180, 131, 0.8)), 
+          url(../img/hero.jpg); /* gradient zawsze pierwszy */
+    background-size: cover; /* cover -> niezaleznie od rozmiaru pudełka, obraz zawsze bedzie starał sie dopasować */
+    background-position: top; /* niezaleznie od rozmiaru widocznego obrazu, góra obrazu zawsze pozostaje na górze -> dolna częćś obrazu zostaje przycięta ale góra pozostaje taka sama */
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);  /* ściezka do klipu -> określamy wielokąt, w którym obraz lub element będzie nadal widoczny -> polygon() to funkcja wielokonta: zaczynamy od lewego górnego rogu i jedziemy zgodnie z ruchem wskazówek zegara, pierwsza wartość to x a druga y*/ 
+    position: relative; /* alelemt nadrzędny względem logo-box */ 
+}
+
+.header__logo-box{
+    position: absolute;
+    top: 4rem;  /* odniesienie względem którego pozycjonujemy jest element nadrzędny, którego pozycja jest ustawiona na względną -> w tym przypadku header */
+    left: 4rem;
+}
+
+.header__logo{
+    height: 3.5rem;  /* ustawiamy wysokość samego elementu a tym samym nie musimy juz ustawiać szerokości */
+}
+
+
+/*
+.logo:hover{
+    animation: moveInRight 1s ease-out;   animacja sie robi po najechaniu na logo mysza
+}
+*/
+
+
+.header__text-box{
+    position: absolute;
+    top: 40%;  /* odnoscnie kometarza nizej tu było 50% ale zostało zmienione na 40% zeby lepiej wygladało bo mamy przycięta grafikę na dole */
+    left: 50%;  /* centrujemy pudełko tak ze jego lewy góryny róg bedzie zanjdował sie po środku wzgledem elementu macierzystego */
+    transform: translate(-50%, -50%); /* te dwie wartosci oznaczaja ze nasz element ma przesunać się o połowę jego szerokości w lewo i o połowę jego wysokości w górę */
+
+    text-align: center;  /* to wycentrowuje przyscisk, a mozna tak zrobic dlatego ze zachowuje sie on jak tekst */
+}
+
+.heading-primary{
+    color: #fff;
+    text-transform: uppercase;
+
+    backface-visibility: hidden;  /* ukrywamy drzenie zachodzące podczas transfor,acji dla uzytkownika np przy obrocie o 18- stopni to co styłu pozostanie w miejscu */
+    
+    margin-bottom: 6rem;  /* przesówa przycisk w doł */
+}
+
+.heading-primary--main{ /* span jest domyślnie elementem inline -> jest to po prostu tekst */
+    display: block;  /* bloc elements zajmują cała dostępna szerokość (100%) i tworzą one podziały linii po i przed nimi -> It starts on a new line, and takes up the whole width */
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+
+    animation-name: moveInLeft; /* nadaje nazwe animacji, która została zdefiniowana poniezej */
+    animation-duration: 1s;  /* czas, który powinna przyjac animacja */
+    animation-timing-function: ease-out; /* funkcja, która okresla spsob animacji np jak szybko lub jak wolno parametry funkcji zdzerzaja sie z czasem np. ease-in zacznie się wolno i na koncu przyspieszy */
+
+    /* 
+    animation-iteration-count: 3;   animacja bedzie powtrzac sie 3 razy 
+    animation-delay: 3s;   zanim animacja się zacznie poczeka 3s 
+    */
+}
+
+.heading-primary--sub{
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.74rem;
+
+    /*
+    animation-name: moveInRight;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    */
+
+    animation: moveInRight 1s ease-out;  /* wszytskie wyzej wymienione funkcje w jednym */
+}
+
+@keyframes moveInLeft{  /* sposób tworzenia animacji, moveInLeft -> nazwa animacji */
+    /* dla wydajności przeglądarki najlepiej animowac tylko dwie rózne własciwosci */
+
+    0%{ /* start animacji */
+        opacity: 0; /* chcemy by na początku nie było jej widac */
+        transform: translateX(-10rem);  /* translateX() bo chcemy animowac w kierunku X -> ! Pamiętać ze kierunke idzie z lewej do prawej więc dajemy wartość ujemną bo chcemy zeby szedł z lewej strony */
+    }
+
+    80%{  /* tu okreslamy co chcemy zeby sie działo w chwili gdy animacja wyniesie 80% */
+        transform: translateX(1rem); /* w tym momecie idzie 20px w prawo a w 100% wraca do osi */
+    }
+
+    100%{  /* finish animacji */
+        opacity: 1;  /* na samym koncu ma byc cała widoczna */
+        transform: translate(0);  /* 0 bo jesli przetłumaczymy cos na 0 to bedzie wygladało dokładnie tak, jak wygląda w wyjściowej formie */
+    }
+
+    /* na samym koncu musimy zdefiniowac w elemencie który chcemy animowac animation-name: moveInLeft i animation-duration: 5s */
+}
+
+
+@keyframes moveInRight{  
+    0%{ 
+        opacity: 0; 
+        transform: translateX(10rem);  
+    }
+
+    80%{  
+        transform: translateX(-1rem); 
+    }
+
+    100%{  
+        opacity: 1;  
+        transform: translate(0);  
+    }
+}
+
+@keyframes moveInUp{  
+    0%{ 
+        opacity: 0; 
+        transform: translateY(10rem);  
+    }
+
+    100%{  
+        opacity: 1;  
+        transform: translate(0);  
+    }
+}
+
+
+.btn:link,  /* Dzięki niej możesz wybrać każdy link, który nie został jeszcze odwiedzony */
+.btn:visited{  /* pseudo-klasa linku */
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;  /* pierwsza wartosc dla top and bottom a druga dla left and right */
+    display: inline-block;  /* ! powinnismy zawsze to wstawiac kiedy chcemy nadac elemenetom jakis padding wyskosc lub szerokosc */
+    border-radius: 10rem;
+    transition: all 0.2s;  /* sprawia ze przycisk ładnie sie porusza z góry na dół bardziej smooth */
+    position: relative;
+    font-size: 1.6rem;
+
+}
+
+.btn:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0, .2); /* pierwsza to x, druga to y, trzecia to rozmycie */
+}
+
+.btn:active{  /* pamieta kiedy klikamy na element i nazywa sie to stanem aktywnym */
+    transform: translateY(-1px);  /* w stosunku do stanu pierwotnego, czyli przejdzie z -3 do -1 czyli przesunie sie w dół - cool */
+    box-shadow: 0 .5rem 1rem rgba(0,0,0, .2); /* bedzie sprawiał wrazenie wcisnietego bo zmniejszylismy wartosci z hover */
+}
+
+.btn--white{
+    background-color: #fff;
+    color: #777;
+}
+
+
+/* psuedoelemnty pozwalaja na stylizowanie pewnych czesci elelemtów */
+.btn::after{  /* tworzymy drugu przycsik pod naszym przyciskiem i go stylizujemy, czyli after słuzy do tworzenia czegos pod czyms? */
+    content: "";  /* okreslenie contentu zawsze jest konieczne */
+    display: inline-block;  /* display tez zawsze musi byc okreslone -> inline-blok bo przycisk który mamy jest równiez blokiem wbudowanym */
+    width: 100%;
+    height: 100%;  /* width i height 100% bo chcemy zeby ten przycisk after wygladał dokładnie tak samo -> width: 100% czyli 100% naszego pierwotnego przycisku */
+    /* pseudoelemnt jest traktowany jako child przycisku dlatego width i height działaja*/
+    border-radius: 10rem;
+    position: absolute; /* by umiescic ten nasz przycisk after dosłownie za naszym przyciskiem */
+    top: 0;
+    left: 0;  /* 0 i 0 odnosi sie do elementu nadrzednego wiec zeby to działało musimy robic .btn position: relative */
+    z-index: -1;  /* bo chemy zeby był ZA przyciskiem a nie przed */
+    transition: all .4s;
+}
+
+.btn--white::after{
+    background-color: #fff;
+}
+
+.btn:hover::after{  /* kiedy najezdzamy kursorem na przycisk chcemy miec pewne style na pseudoelemntu po */
+    transform: scaleX(1.4) scaleY(1.6);  /* chcemy zeby elelment rósł a potem znikał -> scale() aby po prostu zwiekszyc element, scale(2) - element bedzie 2 razy wiekszy niz poprzednio */
+    opacity: 0;
+}
+
+.btn--animated{
+    animation: moveInUp 1s ease-out .75s;  /* ostatnia wartosc to dalay */
+    animation-fill-mode: backwards;  /* tryb wypełnienia animacji  - sprawia ze przycisk wjedzie dopiero po napisach -> robi ze inne animacje zostna zastosowane przed nim */
+}

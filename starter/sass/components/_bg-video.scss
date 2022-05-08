@@ -1,0 +1,23 @@
+// component to jak chce na stonce cos uzyc wielokorotnie
+
+.bg-video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: .15;
+    // ilekrosc cos sie dzieje nieoczekiwanego to ta wałasnosc to naprawia
+    overflow: hidden;
+
+    &__content{
+        height: 100%;
+        width: 100%;
+        // dopasowanie video do rozmiaru
+        // podobne do background-size: cover przy obrazach
+        // moze tez byc :fill, która wypełni cała szerokosc i wysokosc ale nie zachowa proporcji
+        object-fit: cover;
+
+    }
+}

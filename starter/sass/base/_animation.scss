@@ -1,0 +1,50 @@
+/* tu beda wszystkie animacje */
+
+
+@keyframes moveInLeft{  /* sposób tworzenia animacji, moveInLeft -> nazwa animacji */
+    /* dla wydajności przeglądarki najlepiej animowac tylko dwie rózne własciwosci */
+
+    0%{ /* start animacji */
+        opacity: 0; /* chcemy by na początku nie było jej widac */
+        transform: translateX(-10rem);  /* translateX() bo chcemy animowac w kierunku X -> ! Pamiętać ze kierunke idzie z lewej do prawej więc dajemy wartość ujemną bo chcemy zeby szedł z lewej strony */
+    }
+
+    80%{  /* tu okreslamy co chcemy zeby sie działo w chwili gdy animacja wyniesie 80% */
+        transform: translateX(1rem); /* w tym momecie idzie 20px w prawo a w 100% wraca do osi */
+    }
+
+    100%{  /* finish animacji */
+        opacity: 1;  /* na samym koncu ma byc cała widoczna */
+        transform: translate(0);  /* 0 bo jesli przetłumaczymy cos na 0 to bedzie wygladało dokładnie tak, jak wygląda w wyjściowej formie */
+    }
+
+    /* na samym koncu musimy zdefiniowac w elemencie który chcemy animowac animation-name: moveInLeft i animation-duration: 5s */
+}
+
+@keyframes moveInRight{  
+    0%{ 
+        opacity: 0; 
+        transform: translateX(10rem);  
+    }
+
+    80%{  
+        transform: translateX(-1rem); 
+    }
+
+    100%{  
+        opacity: 1;  
+        transform: translate(0);  
+    }
+}
+
+@keyframes moveInUp{  
+    0%{ 
+        opacity: 0; 
+        transform: translateY(10rem);  
+    }
+
+    100%{  
+        opacity: 1;  
+        transform: translate(0);  
+    }
+}

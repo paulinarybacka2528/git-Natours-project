@@ -1,0 +1,108 @@
+
+
+
+.btn{
+    &, // dla tcyh co nie są linkiem czyli <a/>
+    &:link,  /* Dzięki niej możesz wybrać każdy link, który nie został jeszcze odwiedzony */
+    &:visited{  /* pseudo-klasa linku */
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;  /* pierwsza wartosc dla top and bottom a druga dla left and right */
+        display: inline-block;  /* ! powinnismy zawsze to wstawiac kiedy chcemy nadac elemenetom jakis padding wyskosc lub szerokosc */
+        border-radius: 10rem;
+        transition: all 0.2s;  /* sprawia ze przycisk ładnie sie porusza z góry na dół bardziej smooth */
+        position: relative;
+        font-size: $default-font-size;
+
+        //Change for the <button> element
+        border: none;
+        cursor: pointer;
+    }
+
+    &:hover,{
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2rem rgba($color-black, .2); /* pierwsza to x, druga to y, trzecia to rozmycie */
+
+            &::after{  /* kiedy najezdzamy kursorem na przycisk chcemy miec pewne style na pseudoelemntu po */
+                transform: scaleX(1.4) scaleY(1.6);  /* chcemy zeby elelment rósł a potem znikał -> scale() aby po prostu zwiekszyc element, scale(2) - element bedzie 2 razy wiekszy niz poprzednio */
+                opacity: 0;
+            }
+    }
+
+    &:active, //pamieta kiedy klikamy na element i nazywa sie to stanem aktywnym
+    &:focus{  
+        outline: none;
+        transform: translateY(-1px);  /* w stosunku do stanu pierwotnego, czyli przejdzie z -3 do -1 czyli przesunie sie w dół - cool */
+        box-shadow: 0 .5rem 1rem rgba($color-black, .2); /* bedzie sprawiał wrazenie wcisnietego bo zmniejszylismy wartosci z hover */
+    }
+
+    &--white{
+        background-color: $color-white;
+        color: $color-gray-dark;
+
+            &::after{
+                background-color: $color-white;
+            }
+    }
+
+
+    &--green{
+        background-color: $color-primary;
+        color: $color-white;
+
+            &::after{
+                background-color: $color-white;
+            }
+    }
+
+    
+
+
+
+    /* psuedoelemnty pozwalaja na stylizowanie pewnych czesci elelemtów */
+    &::after{  /* tworzymy drugu przycsik pod naszym przyciskiem i go stylizujemy, czyli after słuzy do tworzenia czegos pod czyms? */
+    content: "";  /* okreslenie contentu zawsze jest konieczne */
+    display: inline-block;  /* display tez zawsze musi byc okreslone -> inline-blok bo przycisk który mamy jest równiez blokiem wbudowanym */
+    width: 100%;
+    height: 100%;  /* width i height 100% bo chcemy zeby ten przycisk after wygladał dokładnie tak samo -> width: 100% czyli 100% naszego pierwotnego przycisku */
+    /* pseudoelemnt jest traktowany jako child przycisku dlatego width i height działaja*/
+    border-radius: 10rem;
+    position: absolute; /* by umiescic ten nasz przycisk after dosłownie za naszym przyciskiem */
+    top: 0;
+    left: 0;  /* 0 i 0 odnosi sie do elementu nadrzednego wiec zeby to działało musimy robic .btn position: relative */
+    z-index: -1;  /* bo chemy zeby był ZA przyciskiem a nie przed */
+    transition: all .4s;
+}
+
+    &--animated{
+    animation: moveInUp 1s ease-out .75s;  /* ostatnia wartosc to dalay */
+    animation-fill-mode: backwards;  /* tryb wypełnienia animacji  - sprawia ze przycisk wjedzie dopiero po napisach -> robi ze inne animacje zostna zastosowane przed nim */
+}
+
+}
+
+
+.btn-text{
+    &:link,
+    &:visited{
+        font-size: $default-font-size;
+        color: $color-primary;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid $color-primary;
+        padding: 3px;
+        transition: all .2s;
+    }
+
+    &:hover{
+        background-color: $color-primary;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-black, .15);
+        transform: translateY(-2px);
+    }
+
+    &:active{
+        box-shadow: 0 .5rem 1rem rgba($color-black, .15);
+        transform: translateY(0);
+    }
+}
